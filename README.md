@@ -13,7 +13,7 @@ DOM Manipulator is a synthetic transaction testing tool that uses JavaScript to 
 
 ## Getting Started
 
-The Windows C# Form App source code can be opened and compiled using Visual Studio 2019 Community Edition or you can download the latest binary from the [releases](http://lazysysadmin.com) page. To run the binary you must have .NET framework 4.7.2 installed.
+The Windows C# Form App source code can be opened and compiled using Visual Studio 2019 Community Edition or you can download the latest binary from the [releases](https://github.com/lazysysadmin/DomMan/releases/) page. To run the binary you must have .NET framework 4.7.2 installed.
 
 The below documentation explains how it works, demonstrates key features and functionality and will guide you through the process of creating your first JavaScript transaction.
 
