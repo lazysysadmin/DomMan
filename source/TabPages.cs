@@ -156,64 +156,75 @@ namespace TabPages
                     dgvPasswordCreate.EndEdit();
                     dgvPasswordCreate.CurrentCell = null;
 
-                    if (createCell.Value != null && confirmCell.Value != null)
+                    if (createCell.Value == null)
                     {
-                        bool create = true;
-                        string pwdCreate = createCell.Value.ToString();
-                        string pwdConfirm = confirmCell.Value.ToString();
+                        createCell.Value = "";
+                    }
 
-                        if (pwdCreate.Length > 0 && pwdCreate == pwdConfirm)
+                    if (confirmCell.Value == null)
+                    {
+                        confirmCell.Value = "";
+                    }
+
+                    bool create = true;
+                    string pwdCreate = createCell.Value.ToString();
+                    string pwdConfirm = confirmCell.Value.ToString();
+
+                    if (pwdCreate.Length > 0 && pwdConfirm.Length > 0 && pwdCreate == pwdConfirm)
+                    {
+                        if (DomMan.AppForm.keyPwdLength > 0)
                         {
-                            if (DomMan.AppForm.keyPwdLength > 0)
-                            {
-                                create = false;
-                                File.Delete(key);
-                            }
-
-                            string xml = DomMan.Cryptography.rsa.ToXmlString(true);
-
-                            File.WriteAllText(key, xml);
-
-                            DomMan.Cryptography.EncryptKey(key, pwdCreate);
-
-                            DomMan.Cryptography.LoadKey(key, pwdCreate);
-
-                            DomMan.AppForm.keyPwdLength = pwdCreate.Length;
-                            pwdCell.Value = new String('\u25CF', DomMan.AppForm.keyPwdLength);
-
-                            lblPassword.Text = "Enter a new password and click the key to change your password.";
-                            lblPasswordCreate.Text = "Change Password";
-
-                            pbKey.Image = global::DomMan.Properties.Resources.key_change;
-
-                            DomMan.AppForm.appToolTip.SetToolTip(pbKey, lblPasswordCreate.Text);
-
-                            dgvPassword.Enabled = false;
-                            dgvPasswordCreate.Enabled = true;
-
-                            if (create == true)
-                            {
-                                MessageBox.Show("Successfully created application key file.\n\n" + key + "\n\nIf you forget the password you will not be able decrypt encrypted files.", "Created Application Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Successfully changed the application key password.", "Password Changed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
+                            create = false;
+                            File.Delete(key);
                         }
-                        else
-                        {
-                            if (pwdCreate.Length == 0)
-                            {
-                                MessageBox.Show("Password must contain at least one character.", "Password Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else if (pwdCreate != pwdConfirm)
-                            {
-                                MessageBox.Show("Passwords don't match.", "Password Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
+
+                        string xml = DomMan.Cryptography.rsa.ToXmlString(true);
+
+                        File.WriteAllText(key, xml);
+
+                        DomMan.Cryptography.EncryptKey(key, pwdCreate);
+
+                        DomMan.Cryptography.LoadKey(key, pwdCreate);
+
+                        DomMan.AppForm.keyPwdLength = pwdCreate.Length;
+                        pwdCell.Value = new String('\u25CF', DomMan.AppForm.keyPwdLength);
+
+                        lblPassword.Text = "Enter a new password and click the key to change your password.";
+                        lblPasswordCreate.Text = "Change Password";
+
+                        pbKey.Image = global::DomMan.Properties.Resources.key_change;
+
+                        DomMan.AppForm.appToolTip.SetToolTip(pbKey, lblPasswordCreate.Text);
+
+                        dgvPassword.Enabled = false;
+                        dgvPasswordCreate.Enabled = true;
 
                         createCell.Value = "";
                         confirmCell.Value = "";
+
+                        if (create == true)
+                        {
+                            MessageBox.Show("Successfully created application key file.\n\n" + key + "\n\nIf you forget the password you will not be able decrypt encrypted files.", "Created Application Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Successfully changed the application key password.", "Password Changed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        if (pwdCreate.Length == 0)
+                        {
+                            MessageBox.Show("Password must contain at least one character.", "Password Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (pwdConfirm.Length == 0)
+                        {
+                            MessageBox.Show("Confirm password must contain at least one character.", "Password Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (pwdCreate != pwdConfirm)
+                        {
+                            MessageBox.Show("Passwords don't match.", "Password Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
