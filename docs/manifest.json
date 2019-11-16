@@ -1,0 +1,366 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/paul/Desktop/DomMan/packages/docfx/project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Components.AppDataGridView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Components.AppDataGridView.html",
+          "hash": "y0HwVGlXDAwF9tD4AHWFpw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Components.AppLabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Components.AppLabel.html",
+          "hash": "czXmCFOh+6sC1GeEiHBuXw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Components.AppPictureBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Components.AppPictureBox.html",
+          "hash": "xcFGDku5yi/tovdNkoWpyg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Components.AppTabPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Components.AppTabPage.html",
+          "hash": "IR+J6SZEvjq9T1fl3PhjNA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Components.AppWebBrowser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Components.AppWebBrowser.html",
+          "hash": "05eIIOkM/eZdnKjLvmw70A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Components.PasswordDataGridView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Components.PasswordDataGridView.html",
+          "hash": "oOJ4lOq2XOEXOb1f9jdNnQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Components.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Components.html",
+          "hash": "1qRCJs88HJ/UC/GWP1MfvA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DomMan.AppForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DomMan.AppForm.html",
+          "hash": "59uM2sByW+ayNit038nrMw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DomMan.Cryptography.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DomMan.Cryptography.html",
+          "hash": "6ixDlHKYGPdxsWjqQTOazw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DomMan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DomMan.html",
+          "hash": "zbVkGYV54TGLoHY8gPcY1g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TabPages.Help.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TabPages.Help.html",
+          "hash": "WB8gqoIg/xJqQzxIr87cwA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TabPages.Password.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TabPages.Password.html",
+          "hash": "a+a5Q6kT6HiyJKaQj7JIYg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TabPages.Preview.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TabPages.Preview.html",
+          "hash": "YuPKkPY8DnY+DJVsifgCMw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TabPages.Settings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TabPages.Settings.html",
+          "hash": "mvdkh7qmXsJ+0CM8jvxvcw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TabPages.WebBrowser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TabPages.WebBrowser.html",
+          "hash": "nnQw8DV+qty2wRB8N8wQJg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TabPages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TabPages.html",
+          "hash": "nZclvrTVUDCSpk8LLhVl/Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "K0tsjcZUm1hLjcXpeArWZA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "Q/86vYbBDwlDuS+gjNg+sQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/index.html",
+          "hash": "nkAhVFMWTxtJSM17NXXz8w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "help/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "help/toc.html",
+          "hash": "G969dzUxBeMF0wiwT9USuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "O71tgFw7coOj6645+88F3w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "js/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "js/index.html",
+          "hash": "UbmUNeMi6S1ZvGz/3/PRWg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "js/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "js/toc.html",
+          "hash": "WrY0n30LhEKcyCwTz8p01Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "license/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "license/index.html",
+          "hash": "9YphcxM9BpKQ0SGPhlnpfA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "license/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "license/toc.html",
+          "hash": "wE84QF3MJrabiWSqX/TVOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "LTO1BtJO+W/v1RT2sEfRSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 5,
+          "skipped_file_count": 5
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 16,
+          "skipped_file_count": 16
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
