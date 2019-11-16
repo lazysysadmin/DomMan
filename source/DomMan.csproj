@@ -59,6 +59,9 @@
   <PropertyGroup>
     <StartupObject>DomMan.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>DomMan.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -94,6 +97,7 @@
     <Compile Include="TabPages.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Content Include="DomMan.ico" />
     <Content Include="Images\key_change.png" />
     <EmbeddedResource Include="AppForm.resx">
       <DependentUpon>AppForm.cs</DependentUpon>
