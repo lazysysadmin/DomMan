@@ -17,9 +17,9 @@ The Windows C# Form App source code can be opened and compiled using Visual Stud
 
 The below documentation explains how it works, demonstrates key features and functionality and will guide you through the process of creating your first JavaScript transaction.
 
-* [Help](https://www.lazysysadmin.com/help/index.html) - Help documentation
-* [JavaScript](https://www.lazysysadmin.com/js/index.html) - JavaScript transactions
-* [API](https://www.lazysysadmin.com/api/index.html) - API documentation
+* [Help](https://lazysysadmin.com/help/index.html) - Help documentation
+* [JavaScript](https://lazysysadmin.com/js/index.html) - JavaScript transactions
+* [API](https://lazysysadmin.com/api/index.html) - API documentation
 
 ## Built With
 
