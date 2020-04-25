@@ -1,4 +1,4 @@
-﻿using Components;
+using Components;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -291,7 +291,7 @@ namespace TabPages
                 txtPreview.Text = DomMan.Cryptography.DecryptFile(filePath);
                 if (txtPreview.Text.StartsWith(exception))
                 {
-                    MessageBox.Show(txtPreview.Text.Replace(exception, "An error occured decrypting the JavaScript File.\n\n" + filePath), exception, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(txtPreview.Text.Replace(exception, "An error occurred decrypting the JavaScript File.\n\n" + filePath), exception, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtPreview.Dispose();
                     return;
                 }
@@ -374,7 +374,7 @@ namespace TabPages
                     if (DomMan.AppForm.PromptForPassword() == true)
                     {
                         ToolStripButton button = (ToolStripButton)sender;
-                        TabControl appTabControl = (TabControl)button.Owner.Parent.Parent;
+                        TabControl appTabControl = DomMan.AppForm.appTabControl;
                         if (appTabControl.Controls.ContainsKey("tabPassword"))
                         {
                             AppTabPage tabPassword = (AppTabPage)appTabControl.Controls["tabPassword"];
@@ -764,7 +764,7 @@ namespace TabPages
                         string exception = "CryptographicException";
                         if (xml.StartsWith(exception))
                         {
-                            MessageBox.Show("An error occured decrypting the DOM File.\n\n" + filePath + xml.Replace(exception, String.Empty), exception, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("An error occurred decrypting the DOM File.\n\n" + filePath + xml.Replace(exception, String.Empty), exception, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
 
@@ -1184,7 +1184,7 @@ namespace TabPages
         public WebBrowser()
         {
             string name = Settings.dgvSiteDetails.Rows[0].Cells[1].Value.ToString();
-            string jsCode = "";
+            string javaScript = "";
             DataGridViewCell file = Settings.dgvScriptDetails.Rows[0].Cells[1];
             string filePath = file.Value.ToString();
             if (filePath.Length > 0)
@@ -1193,23 +1193,23 @@ namespace TabPages
                 {
                     AppTabPage tabPreview = (AppTabPage)DomMan.AppForm.appTabControl.Controls["tabPreview"];
                     TextBox txtScriptPreview = (TextBox)tabPreview.Controls["txtScriptPreview"];
-                    jsCode = txtScriptPreview.Text;
+                    javaScript = txtScriptPreview.Text;
                 }
                 else
                 {
                     if (DomMan.Cryptography.IsEncrypted(filePath) == true)
                     {
                         string exception = "CryptographicException";
-                        jsCode = DomMan.Cryptography.DecryptFile(filePath);
-                        if (jsCode.StartsWith(exception))
+                        javaScript = DomMan.Cryptography.DecryptFile(filePath);
+                        if (javaScript.StartsWith(exception))
                         {
-                            MessageBox.Show(jsCode.Replace(exception, "An error occured decrypting the JavaScript File.\n\n" + filePath), exception, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(javaScript.Replace(exception, "An error occurred decrypting the JavaScript File.\n\n" + filePath), exception, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
                     else
                     {
-                        jsCode = File.ReadAllText(filePath);
+                        javaScript = File.ReadAllText(filePath);
                     }
                 }
             }
@@ -1218,18 +1218,21 @@ namespace TabPages
             Name = "tab" + name;
             ImageIndex = 3;
 
+            string[] timeSpan;
+            timeSpan = new string[3];
+
             int counter = -1;
             string postBack = "";
             string args = Settings.dgvScriptDetails.Rows[1].Cells[1].Value.ToString();
 
-            AppWebBrowser wb = new AppWebBrowser
+            AppWebBrowser webBrowser = new AppWebBrowser
             {
                 Name = "wb" + name,
                 Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right))),
                 ScriptErrorsSuppressed = true
             };
-            wb.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DomLoad);
-            wb.Navigating += new WebBrowserNavigatingEventHandler(DomNavigate);
+            webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DomLoad);
+            webBrowser.Navigating += new WebBrowserNavigatingEventHandler(DomNavigate);
 
             string location = Settings.dgvSiteDetails.Rows[1].Cells[1].Value.ToString();
             if (File.Exists(location))
@@ -1243,14 +1246,14 @@ namespace TabPages
             {
                 string auth = Convert.ToBase64String(Encoding.ASCII.GetBytes(username + ":" + password));
                 string headers = "Authorization: Basic " + auth + "\r\n";
-                wb.Navigate(location, "", null, headers);
+                webBrowser.Navigate(location, "", null, headers);
             }
             else
             {
-                wb.Navigate(location, "", null, "");
+                webBrowser.Navigate(location, "", null, "");
             }
 
-            this.Controls.Add(wb);
+            this.Controls.Add(webBrowser);
 
             DomMan.AppForm.appTabControl.TabPages.Add(this);
             DomMan.AppForm.appTabControl.SelectedTab = this;
@@ -1258,79 +1261,99 @@ namespace TabPages
             // WebBrowserDocumentCompletedEventHandler to inject and invoke the JavaScript source when the page loads.
             void DomLoad(object sender, WebBrowserDocumentCompletedEventArgs e)
             {
-                AppWebBrowser domLoad = (AppWebBrowser)sender;
-                if (domLoad.ReadyState != WebBrowserReadyState.Complete)
+                if (webBrowser.ReadyState != WebBrowserReadyState.Complete)
                 {
                     return;
                 }
 
-                if (e.Url.AbsolutePath != domLoad.Url.AbsolutePath)
+                if (e.Url.AbsolutePath != webBrowser.Url.AbsolutePath)
                 {
                     return;
                 }
 
-                if (domLoad.Document.GetElementById("WebBrowserInvokeScript") == null)
+                webBrowser.Document.Window.AttachEventHandler("onload", delegate
                 {
-                    HtmlDocument doc = domLoad.Document;
-                    HtmlElement head = doc.GetElementsByTagName("head")[0];
-                    HtmlElement script = doc.CreateElement("script");
-                    script.SetAttribute("id", "WebBrowserInvokeScript");
-                    script.SetAttribute("text", "function WebBrowserInvokeScript(args) { " + jsCode + " }");
-                    head.AppendChild(script);
-
-                    HtmlElement elPost = doc.GetElementById("WebBrowserPostBack");
-                    if (elPost == null)
+                    // Defer this to make sure all possible onload event handlers got fired.
+                    System.Threading.SynchronizationContext.Current.Post(delegate
                     {
-                        elPost = doc.CreateElement("textarea");
-                        elPost.SetAttribute("id", "WebBrowserPostBack");
-                        elPost.InnerText = postBack;
-                        domLoad.Document.Body.AppendChild(elPost);
-                    }
-                    elPost.Style = "display:none;";
+                        if (webBrowser.Document.GetElementById("WebBrowserInvokeScript") == null)
+                        {
+                            HtmlDocument doc = webBrowser.Document;
+                            HtmlElement head = doc.GetElementsByTagName("head")[0];
 
-                    counter += 1;
-                    string scriptArgs;
-                    if (args.Length > 0)
-                    {
-                        scriptArgs = counter.ToString() + "," + args;
-                    }
-                    else
-                    {
-                        scriptArgs = counter.ToString();
-                    }
+                            timeSpan[1] = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt");
+                            TimeSpan difference = DateTime.Parse(timeSpan[1]) - DateTime.Parse(timeSpan[0]);
+                            timeSpan[2] = difference.TotalSeconds.ToString();
 
-                    Object[] objArray = new Object[1];
-                    objArray[0] = (Object)scriptArgs;
+                            HtmlElement webBrowserTimeSpan = doc.CreateElement("span");
+                            webBrowserTimeSpan.SetAttribute("id", "WebBrowserTimeSpan");
+                            webBrowserTimeSpan.SetAttribute("style", "display:none;");
+                            webBrowserTimeSpan.SetAttribute("start", timeSpan[0]);
+                            webBrowserTimeSpan.SetAttribute("finish", timeSpan[1]);
+                            webBrowserTimeSpan.SetAttribute("difference", timeSpan[2]);
+                            head.AppendChild(webBrowserTimeSpan);
 
-                    domLoad.Document.InvokeScript("WebBrowserInvokeScript", objArray);
-                }
+                            HtmlElement webBrowserInvokeScript = doc.CreateElement("script");
+                            webBrowserInvokeScript.SetAttribute("id", "WebBrowserInvokeScript");
+                            webBrowserInvokeScript.SetAttribute("text", "function WebBrowserInvokeScript(args) { " + javaScript + " }");
+                            head.AppendChild(webBrowserInvokeScript);
+
+                            HtmlElement webBrowserPostBack = doc.GetElementById("WebBrowserPostBack");
+                            if (webBrowserPostBack == null)
+                            {
+                                webBrowserPostBack = doc.CreateElement("textarea");
+                                webBrowserPostBack.SetAttribute("id", "WebBrowserPostBack");
+                                webBrowserPostBack.InnerText = postBack;
+                                webBrowser.Document.Body.AppendChild(webBrowserPostBack);
+                            }
+                            webBrowserPostBack.Style = "display:none;";
+
+                            counter += 1;
+                            string scriptArgs;
+                            if (args.Length > 0)
+                            {
+                                scriptArgs = counter.ToString() + "," + args;
+                            }
+                            else
+                            {
+                                scriptArgs = counter.ToString();
+                            }
+
+                            Object[] objArray = new Object[1];
+                            objArray[0] = (Object)scriptArgs;
+
+                            webBrowser.Document.InvokeScript("WebBrowserInvokeScript", objArray);
+                        }
+                    }, null);
+                });
             }
 
             // WebBrowserNavigatingEventHandler to pass data and write local text files on navigate.
             void DomNavigate(object sender, WebBrowserNavigatingEventArgs e)
             {
-                AppWebBrowser domNavigate = (AppWebBrowser)sender;
-                if (domNavigate.Parent != null)
+                if (webBrowser.Parent != null)
                 {
-                    HtmlDocument doc = domNavigate.Document;
-                    HtmlElement elFile = doc.GetElementById("WebBrowserFileWriter");
-                    if (elFile != null)
+                    HtmlDocument doc = webBrowser.Document;
+                    HtmlElement webBrowserFileWriter = doc.GetElementById("WebBrowserFileWriter");
+                    if (webBrowserFileWriter != null)
                     {
-                        string path = elFile.GetAttribute("path");
+                        string path = webBrowserFileWriter.GetAttribute("path");
                         if (path != null)
                         {
-                            File.AppendAllText(path, elFile.InnerText + "\r\n");
+                            File.AppendAllText(path, webBrowserFileWriter.InnerText + "\r\n");
                         }
-                        elFile.OuterHtml = "";
+                        webBrowserFileWriter.OuterHtml = "";
                     }
 
-                    HtmlElement elPost = doc.GetElementById("WebBrowserPostBack");
-                    if (elPost != null)
+                    HtmlElement webBrowserPostBack = doc.GetElementById("WebBrowserPostBack");
+                    if (webBrowserPostBack != null)
                     {
-                        postBack += elPost.InnerText;
-                        elPost.OuterHtml = "";
+                        postBack += webBrowserPostBack.InnerText;
+                        webBrowserPostBack.OuterHtml = "";
                     }
                 }
+
+                timeSpan[0] = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt");
             }
         }
     }
